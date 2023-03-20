@@ -1,1 +1,3 @@
-# class_political_psychology
+# Political Psychology
+
+Material for the BA/MA class in political psychology
