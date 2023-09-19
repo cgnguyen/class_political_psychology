@@ -52,6 +52,19 @@
   
   look_for(D,"F2")
   
+   D<-
+    D%>%
+      mutate(activtity=as_factor(v_28_w1))%>%
+      mutate(activity_simple=car::recode(activtity,
+                                         "'Vollzeit berufstätig'='Berufstätig';
+                                          'Teilzeit berufstätig'='Berufstätig'"))
+     
+   summary(D$activity_simple) 
+      
+   
+   summary(D$activtity)
+  
+  
   ##numerische Variable zu Faktor Variable ---------------------------
   
   
@@ -77,10 +90,15 @@
   ###Aufgabe 2- 
   #Links rechts Selbsteinstufung in Welle 1 - Nutzt das Codebuch um den Namen zu finden
   #Die Skala sollte von 0 bis 10  laufen
+  look_for(D,"left")
   
+  D$v_102_w1 
   
-  
-  
+  D<-
+    D%>%
+      mutate(lr=car::recode(v_102_w1,"-998=NA;
+                                      -999=NA")-1)
+  summary(D$lr)
    
   ##Numerische variable Reinigen - Komplex ------------------
   #Big 5
@@ -101,10 +119,7 @@
            big_5_consc= rowMeans(dplyr::select(.,big5_consc_1,big5_extro_2), na.rm=T),
            big_5_neuro= rowMeans(dplyr::select(.,big5_neuro_1,big5_neuro_2), na.rm=T),
            big_5_open= rowMeans(dplyr::select(.,big5_open_1,big5_open_2), na.rm=T))
-  
-  
-  
-  
+
 #Daten zusammenfassen und visualsieren--------------------------
     #Verteilung von Links-Rechts Selbsteinstufung 
     D%>%
